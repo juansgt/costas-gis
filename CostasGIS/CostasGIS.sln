@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.WebAPIService", "CostasGIS\CostasGIS.WebAPIService.csproj", "{50DD8A6F-EEDA-48EC-9F18-144B210070B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.Tests", "CostasGIS.Tests\CostasGIS.Tests.csproj", "{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.Model", "CostasGIS.Model\CostasGIS.Model.csproj", "{D761642A-CE7D-49FB-9469-0374C1732085}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50DD8A6F-EEDA-48EC-9F18-144B210070B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50DD8A6F-EEDA-48EC-9F18-144B210070B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50DD8A6F-EEDA-48EC-9F18-144B210070B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50DD8A6F-EEDA-48EC-9F18-144B210070B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D761642A-CE7D-49FB-9469-0374C1732085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D761642A-CE7D-49FB-9469-0374C1732085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D761642A-CE7D-49FB-9469-0374C1732085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D761642A-CE7D-49FB-9469-0374C1732085}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
