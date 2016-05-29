@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.Tests", "CostasGIS.Tests\CostasGIS.Tests.csproj", "{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.Model", "CostasGIS.Model\CostasGIS.Model.csproj", "{D761642A-CE7D-49FB-9469-0374C1732085}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.WebAPIService", "CostasGIS.WebAPIService\CostasGIS.WebAPIService.csproj", "{C633B3D9-FDB2-4741-B8B0-8B170F46668A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.WebAPIService.Tests", "CostasGIS.WebAPIService.Tests\CostasGIS.WebAPIService.Tests.csproj", "{A700F0C8-6442-47D5-804C-1013D8A2FB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B328F68-2B5D-49A2-A99A-FB7CDDD5F482}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D761642A-CE7D-49FB-9469-0374C1732085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D761642A-CE7D-49FB-9469-0374C1732085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D761642A-CE7D-49FB-9469-0374C1732085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D761642A-CE7D-49FB-9469-0374C1732085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C633B3D9-FDB2-4741-B8B0-8B170F46668A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C633B3D9-FDB2-4741-B8B0-8B170F46668A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C633B3D9-FDB2-4741-B8B0-8B170F46668A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C633B3D9-FDB2-4741-B8B0-8B170F46668A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A700F0C8-6442-47D5-804C-1013D8A2FB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A700F0C8-6442-47D5-804C-1013D8A2FB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A700F0C8-6442-47D5-804C-1013D8A2FB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A700F0C8-6442-47D5-804C-1013D8A2FB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

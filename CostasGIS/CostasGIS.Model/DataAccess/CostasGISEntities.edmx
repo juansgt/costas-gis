@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CostasGISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ocupacion">
+          <Key>
+            <PropertyRef Name="IdOcupacion" />
+          </Key>
+          <Property Name="IdOcupacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DUNA" Type="varchar" MaxLength="200" />
+          <Property Name="SP" Type="varchar" MaxLength="50" />
+          <Property Name="DG" Type="varchar" MaxLength="200" />
+          <Property Name="IdProvincia" Type="bigint" />
+          <Property Name="Municipio" Type="varchar" MaxLength="200" />
+          <Property Name="Geometria" Type="geometry" Nullable="false" />
+          <Property Name="Huso" Type="varchar" MaxLength="50" />
+          <Property Name="Datum" Type="varchar" MaxLength="50" />
+          <Property Name="Uso" Type="varchar(max)" />
+          <Property Name="Tipo" Type="varchar(max)" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Situación" Type="varchar" MaxLength="200" />
+          <Property Name="FechaOtorgamiento" Type="datetime" />
+          <Property Name="FechaExtincion" Type="datetime" />
+          <Property Name="FechaDenegacion" Type="datetime" />
+          <Property Name="ExpSancionador" Type="bit" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Ocupacion_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Ocupacion" Type="Self.Ocupacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Ocupacion">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CostasGISModelStoreContainer">
+          <EntitySet Name="Ocupacion" EntityType="Self.Ocupacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ocupacion_Provincia" Association="Self.FK_Ocupacion_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Ocupacion" EntitySet="Ocupacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CostasGISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ocupacion">
+          <Key>
+            <PropertyRef Name="IdOcupacion" />
+          </Key>
+          <Property Name="IdOcupacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DUNA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DG" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="Int64" />
+          <Property Name="Geometria" Type="Geometry" Nullable="false" />
+          <Property Name="Huso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Datum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Uso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Situación" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaOtorgamiento" Type="DateTime" Precision="3" />
+          <Property Name="FechaExtincion" Type="DateTime" Precision="3" />
+          <Property Name="FechaDenegacion" Type="DateTime" Precision="3" />
+          <Property Name="ExpSancionador" Type="Boolean" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Provincia" Relationship="CostasGISModel.FK_Ocupacion_Provincia" FromRole="Ocupacion" ToRole="Provincia" />
+        </EntityType>
+        <EntityContainer Name="CostasGISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ocupacion" EntityType="Self.Ocupacion" />
+          <EntitySet Name="Provincia" EntityType="CostasGISModel.Provincia" />
+          <AssociationSet Name="FK_Ocupacion_Provincia" Association="CostasGISModel.FK_Ocupacion_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Ocupacion" EntitySet="Ocupacion" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ocupacion" Relationship="CostasGISModel.FK_Ocupacion_Provincia" FromRole="Provincia" ToRole="Ocupacion" />
+        </EntityType>
+        <Association Name="FK_Ocupacion_Provincia">
+          <End Type="CostasGISModel.Provincia" Role="Provincia" Multiplicity="0..1" />
+          <End Type="CostasGISModel.Ocupacion" Role="Ocupacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="Ocupacion">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CostasGISModelStoreContainer" CdmEntityContainer="CostasGISEntities">
+          <EntitySetMapping Name="Ocupacion">
+            <EntityTypeMapping TypeName="CostasGISModel.Ocupacion">
+              <MappingFragment StoreEntitySet="Ocupacion">
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="IdOcupacion" ColumnName="IdOcupacion" />
+                <ScalarProperty Name="DUNA" ColumnName="DUNA" />
+                <ScalarProperty Name="SP" ColumnName="SP" />
+                <ScalarProperty Name="DG" ColumnName="DG" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="Geometria" ColumnName="Geometria" />
+                <ScalarProperty Name="Huso" ColumnName="Huso" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Uso" ColumnName="Uso" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Situación" ColumnName="Situación" />
+                <ScalarProperty Name="FechaOtorgamiento" ColumnName="FechaOtorgamiento" />
+                <ScalarProperty Name="FechaExtincion" ColumnName="FechaExtincion" />
+                <ScalarProperty Name="FechaDenegacion" ColumnName="FechaDenegacion" />
+                <ScalarProperty Name="ExpSancionador" ColumnName="ExpSancionador" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="CostasGISModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

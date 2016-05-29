@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CostasGIS.Tests")]
+[assembly: AssemblyTitle("CostasGIS.WebAPIService.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CostasGIS.Tests")]
+[assembly: AssemblyProduct("CostasGIS.WebAPIService.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7b328f68-2b5d-49a2-a99a-fb7cddd5f482")]
+[assembly: Guid("a700f0c8-6442-47d5-804c-1013d8a2fb34")]
 
 // Version information for an assembly consists of the following four values:
 //

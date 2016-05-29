@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CostasGIS.Tests
+namespace CostasGIS.WebAPIService.Tests
 {
     [TestClass]
     public class UnitTest1
