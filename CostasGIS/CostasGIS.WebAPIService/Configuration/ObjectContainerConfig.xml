@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Classes>
+
+  <!--DAO-->
+
+  <Class lifetime="new">
+    <ClassType>Model.DataAccess.OcupacionDao.IOcupacionDao</ClassType>
+    <ClassInstance>Model.DataAccess.OcupacionDao.OcupacionDaoPocoEF, Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+  </Class>
+
+  <Class lifetime="new">
+    <ClassType>Model.DataAccess.ProvinciaDao.IProvinciaDao</ClassType>
+    <ClassInstance>Model.DataAccess.ProvinciaDao.ProvinciaDaoPocoEF, Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+  </Class>
+  
+  <!--SERVICIOS-->
+  
+</Classes>

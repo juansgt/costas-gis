@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,16 +67,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CostasGISEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\Exceptions\DuplicateInstanceException.cs" />
+    <Compile Include="DataAccess\Exceptions\ExceptionCode.cs" />
+    <Compile Include="DataAccess\Exceptions\InstanceException.cs" />
+    <Compile Include="DataAccess\Exceptions\InstanceNotFoundException.cs" />
+    <Compile Include="DataAccess\Exceptions\InternalErrorException.cs" />
+    <Compile Include="DataAccess\Exceptions\ModelException.cs" />
+    <Compile Include="DataAccess\Exceptions\ParcelMismatchException.cs" />
+    <Compile Include="DataAccess\Exceptions\SqlException.cs" />
+    <Compile Include="DataAccess\GenericDao\GenericDaoPocoEntityFramework.cs" />
+    <Compile Include="DataAccess\GenericDao\IGenericDao.cs" />
     <Compile Include="DataAccess\Ocupacion.cs">
       <DependentUpon>CostasGISEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\OcupacionDao\IOcupacionDao.cs" />
+    <Compile Include="DataAccess\OcupacionDao\OcupacionDaoPocoEF.cs" />
     <Compile Include="DataAccess\Provincia.cs">
       <DependentUpon>CostasGISEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\ProvinciaDao\IProvinciaDao.cs" />
+    <Compile Include="DataAccess\ProvinciaDao\ProvincaiDaoPocoEF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CatalogService\CatalogServiceImpl.cs" />
+    <Compile Include="Services\CatalogService\ICatalogService.cs" />
+    <Compile Include="Services\OcupationService\IOcupationService.cs" />
+    <Compile Include="Services\OcupationService\OcupationServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="DataAccess\CostasGISEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CostasGISEntities.Designer.cs</LastGenOutput>
@@ -100,8 +121,12 @@
       <LastGenOutput>CostasGISEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DataAccess\OcupacionDao\" />
+    <ProjectReference Include="..\ObjectContainer\ObjectContainer.csproj">
+      <Project>{677c46b8-57e4-4b76-8a9b-f4046105d8dc}</Project>
+      <Name>ObjectContainer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
