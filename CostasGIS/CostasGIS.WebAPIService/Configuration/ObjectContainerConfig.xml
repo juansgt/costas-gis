@@ -5,15 +5,21 @@
   <!--DAO-->
 
   <Class lifetime="new">
-    <ClassType>Model.DataAccess.OcupacionDao.IOcupacionDao</ClassType>
-    <ClassInstance>Model.DataAccess.OcupacionDao.OcupacionDaoPocoEF, Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+    <ClassType>CostasGIS.Model.DataAccess.OcupacionDao.IOcupacionDao</ClassType>
+    <ClassInstance>CostasGIS.Model.DataAccess.OcupacionDao.OcupacionDaoPocoEF, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
   </Class>
 
   <Class lifetime="new">
-    <ClassType>Model.DataAccess.ProvinciaDao.IProvinciaDao</ClassType>
-    <ClassInstance>Model.DataAccess.ProvinciaDao.ProvinciaDaoPocoEF, Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+    <ClassType>CostasGIS.Model.DataAccess.ProvinciaDao.IProvinciaDao</ClassType>
+    <ClassInstance>CostasGIS.Model.DataAccess.ProvinciaDao.ProvinciaDaoPocoEF, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
   </Class>
   
   <!--SERVICIOS-->
+
+  <Class lifetime="new">
+    <ClassType>CostasGIS.Model.Services.CatalogService.ICatalogService</ClassType>
+    <ClassInstance>CostasGIS.Model.Services.CatalogService.CatalogServiceImpl, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+  </Class>
+
   
 </Classes>

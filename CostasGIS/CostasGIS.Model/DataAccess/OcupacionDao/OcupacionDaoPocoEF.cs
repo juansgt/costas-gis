@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CostasGIS.Model.DataAccess.OcupacionDao
 {
-    internal class OcupacionDaoPocoEF : GenericDaoPocoEntityFramework<Ocupacion, long>, IOcupacionDao
+    internal class OcupacionDaoPocoEF : GenericDaoPocoEntityFramework<CostasGISEntities, Ocupacion, long>, IOcupacionDao
     {
     }
 }

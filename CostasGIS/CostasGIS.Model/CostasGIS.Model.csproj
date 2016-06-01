@@ -86,7 +86,7 @@
       <DependentUpon>CostasGISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\ProvinciaDao\IProvinciaDao.cs" />
-    <Compile Include="DataAccess\ProvinciaDao\ProvincaiDaoPocoEF.cs" />
+    <Compile Include="DataAccess\ProvinciaDao\ProvinciaDaoPocoEF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CatalogService\CatalogServiceImpl.cs" />
     <Compile Include="Services\CatalogService\ICatalogService.cs" />

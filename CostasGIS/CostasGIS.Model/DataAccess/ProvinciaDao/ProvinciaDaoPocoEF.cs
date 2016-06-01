@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CostasGIS.Model.DataAccess.ProvinciaDao
 {
-    internal class ProvincaiDaoPocoEF : GenericDaoPocoEntityFramework<Provincia, long>, IProvinciaDao
+    internal class ProvinciaDaoPocoEF : GenericDaoPocoEntityFramework<CostasGISEntities, Provincia, long>, IProvinciaDao
     {
     }
 }

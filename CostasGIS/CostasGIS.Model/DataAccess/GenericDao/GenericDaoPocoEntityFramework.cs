@@ -10,15 +10,16 @@ using CostasGIS.Model.DataAccess;
 
 namespace Model.DataAccess.GenericDao
 {
-    internal class GenericDaoPocoEntityFramework<E, PK> : IGenericDao<E, PK> where E : class
+    internal class GenericDaoPocoEntityFramework<DS, E, PK> : IGenericDao<E, PK> where DS : class where E : class
     {
-        private const string COSTASGIS_ENTITIES = "Model.DataAccess";
+        private string dataSourceName;
         private Container container = Container.Instance;
 
         public virtual E Find(PK id)
         {
-            using (DbContext context = this.getDbContext(typeof(E).Namespace))
+            using (DbContext context = this.getDbContext())
             {
+                context.Configuration.ProxyCreationEnabled = false;
                 E result = context.Set<E>().Find(id);
 
                 if (result == null)
@@ -34,7 +35,7 @@ namespace Model.DataAccess.GenericDao
 
         public virtual IEnumerable<E> FindAll()
         {
-            using (DbContext context = this.getDbContext(typeof(E).Namespace))
+            using (DbContext context = this.getDbContext())
             {
                 List<E> result = context.Set<E>().ToList<E>();
 
@@ -44,7 +45,7 @@ namespace Model.DataAccess.GenericDao
 
         public virtual E Create(E entity)
         {
-            using (DbContext context = this.getDbContext(typeof(E).Namespace))
+            using (DbContext context = this.getDbContext())
             {
                 try
                 {
@@ -83,7 +84,7 @@ namespace Model.DataAccess.GenericDao
 
         public virtual Boolean Exists(PK id)
         {
-            using (DbContext context = this.getDbContext(typeof(E).Namespace))
+            using (DbContext context = this.getDbContext())
             {
                 E result = context.Set<E>().Find(id);
 
@@ -100,7 +101,7 @@ namespace Model.DataAccess.GenericDao
 
         public virtual E Update(E entity)
         {
-            using (DbContext context = this.getDbContext(typeof(E).Namespace))
+            using (DbContext context = this.getDbContext())
             {
                 try
                 {
@@ -121,7 +122,7 @@ namespace Model.DataAccess.GenericDao
 
         public virtual void Remove(PK id)
         {
-            using (DbContext context = this.getDbContext(typeof(E).Namespace))
+            using (DbContext context = this.getDbContext())
             {
                 try
                 {
@@ -148,15 +149,12 @@ namespace Model.DataAccess.GenericDao
             }
         }
 
-        protected DbContext getDbContext(string nameSpace)
+        protected DbContext getDbContext()
         {
-            switch (nameSpace)
-            {
-                case COSTASGIS_ENTITIES:
-                    return (DbContext)Container.Instance.ResolveObject<CostasGISEntities>();
-                default:
-                    throw new InstanceNotFoundException(nameSpace, typeof(DbContext).FullName);
-            }
+            DbContext dbContext = (DbContext)Activator.CreateInstance(typeof(DS));
+            dbContext.Configuration.ProxyCreationEnabled = false;
+
+            return dbContext;
         }
 
         //ObjectContext objectContext = ((IObjectContextAdapter)context).ObjectContext;
