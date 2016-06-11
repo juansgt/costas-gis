@@ -10,5 +10,6 @@ namespace CostasGIS.Model.Services.OcupationService
     public interface IOcupationService
     {
         long AddOcupation(long idProvincia, Ocupacion ocupacion);
+        IEnumerable<string> ImportFromKml();
     }
 }

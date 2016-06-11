@@ -20,6 +20,10 @@
     <ClassType>CostasGIS.Model.Services.CatalogService.ICatalogService</ClassType>
     <ClassInstance>CostasGIS.Model.Services.CatalogService.CatalogServiceImpl, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
   </Class>
+  <Class lifetime="new">
+    <ClassType>CostasGIS.Model.Services.OcupationService.IOcupationService</ClassType>
+    <ClassInstance>CostasGIS.Model.Services.OcupationService.OcupationServiceImpl, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+  </Class>
 
   
 </Classes>
