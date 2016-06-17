@@ -39,6 +39,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SharpKml, Version=2.1.3.0, Culture=neutral, PublicKeyToken=9bb853c026a5c0ac, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\SharpKml\SharpKml.dll</HintPath>
@@ -97,6 +101,8 @@
     <Compile Include="Services\CatalogService\ICatalogService.cs" />
     <Compile Include="Services\OcupationService\IOcupationService.cs" />
     <Compile Include="Services\OcupationService\OcupationServiceImpl.cs" />
+    <Compile Include="Services\Util\HTML\HtmlParsingImpl.cs" />
+    <Compile Include="Services\Util\HTML\IHtmlParsing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -130,6 +136,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\GeometryExtensions\GeometryExtensions.csproj">
+      <Project>{56F406D2-EE77-4CED-9888-A23DB32FA3E5}</Project>
+      <Name>GeometryExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectContainer\ObjectContainer.csproj">
       <Project>{677c46b8-57e4-4b76-8a9b-f4046105d8dc}</Project>
       <Name>ObjectContainer</Name>

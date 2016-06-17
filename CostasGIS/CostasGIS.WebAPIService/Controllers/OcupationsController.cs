@@ -26,5 +26,13 @@ namespace CostasGIS.WebAPIService.Controllers
         {
             return ocupationService.ImportFromKml();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/")]
+        public IEnumerable<string> ImportOcupaciones()
+        {
+            return ocupationService.ImportFromKml();
+        }
     }
 }

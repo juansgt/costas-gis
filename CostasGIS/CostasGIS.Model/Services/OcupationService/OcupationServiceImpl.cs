@@ -11,11 +11,15 @@ using ObjectContainer.Transactions;
 using SharpKml.Engine;
 using System.IO;
 using SharpKml.Dom;
+using System.Data.Entity.Spatial;
+using GeometryExtensions;
+using CostasGIS.Model.Services.Util.HTML;
 
 namespace CostasGIS.Model.Services.OcupationService
 {
     public class OcupationServiceImpl : IOcupationService
     {
+        private readonly int COORDINATE_SYSTEMID = 25829;
         private ObjectContainer.Container container = ObjectContainer.Container.Instance;
         private IOcupacionDao ocupationDao;
 
@@ -38,6 +42,9 @@ namespace CostasGIS.Model.Services.OcupationService
 
         public IEnumerable<string> ImportFromKml()
         {
+            IHtmlParsing htmlParsing = new HtmlParsingImpl();
+            Ocupacion ocupacion;
+            Point point;
             List<string> names = new List<string>();
             // This will read a Kml file into memory.
             KmlFile file = KmlFile.Load(new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/Documents/KMLImport/Ocupaciones D.P.kml", FileMode.Open));
@@ -45,9 +52,21 @@ namespace CostasGIS.Model.Services.OcupationService
             Kml kml = file.Root as Kml;
             if (kml != null)
             {
-                foreach (var placemark in kml.Flatten().OfType<Placemark>())
+                foreach (Folder folder in kml.Flatten().OfType<Folder>())
                 {
-                    names.Add(placemark.Name);
+                    if (folder.Name == "GALICIA")
+                    {
+                        foreach (Placemark placemark in folder.Flatten().OfType<Placemark>())
+                        {
+                            ocupacion = new Ocupacion();
+                            point = placemark.Flatten().OfType<Point>().ElementAt(0);
+                            ocupacion.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometry(point.Coordinate.Latitude, point.Coordinate.Longitude, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
+                            ocupacion.Descripcion = htmlParsing.ParseOcupacion(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", "")).Descripcion;
+
+                            ocupationDao.Create(ocupacion);
+                        }
+                        break;
+                    }
                 }
             }
 

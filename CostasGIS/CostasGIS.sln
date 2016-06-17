@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CostasGIS.WebAPIService.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectContainer", "ObjectContainer\ObjectContainer.csproj", "{677C46B8-57E4-4B76-8A9B-F4046105D8DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryExtensions", "GeometryExtensions\GeometryExtensions.csproj", "{56F406D2-EE77-4CED-9888-A23DB32FA3E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{677C46B8-57E4-4B76-8A9B-F4046105D8DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{677C46B8-57E4-4B76-8A9B-F4046105D8DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{677C46B8-57E4-4B76-8A9B-F4046105D8DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
