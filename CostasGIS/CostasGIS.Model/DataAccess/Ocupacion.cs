@@ -25,13 +25,15 @@ namespace CostasGIS.Model.DataAccess
         public string Uso { get; set; }
         public string Tipo { get; set; }
         public string Titulo { get; set; }
-        public string Situación { get; set; }
         public Nullable<System.DateTime> FechaOtorgamiento { get; set; }
         public Nullable<System.DateTime> FechaExtincion { get; set; }
         public Nullable<System.DateTime> FechaDenegacion { get; set; }
         public Nullable<bool> ExpSancionador { get; set; }
         public string Descripcion { get; set; }
         public string Municipio { get; set; }
+        public Nullable<double> CoordenadaXOriginal { get; set; }
+        public Nullable<double> CoordenadaYOriginal { get; set; }
+        public string Situacion { get; set; }
     
         public virtual Provincia Provincia { get; set; }
     }

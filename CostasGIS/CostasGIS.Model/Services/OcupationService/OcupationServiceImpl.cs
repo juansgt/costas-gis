@@ -48,7 +48,7 @@ namespace CostasGIS.Model.Services.OcupationService
             List<string> names = new List<string>();
             // This will read a Kml file into memory.
             KmlFile file = KmlFile.Load(new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/Documents/KMLImport/Ocupaciones D.P.kml", FileMode.Open));
-
+            
             Kml kml = file.Root as Kml;
             if (kml != null)
             {
@@ -58,11 +58,9 @@ namespace CostasGIS.Model.Services.OcupationService
                     {
                         foreach (Placemark placemark in folder.Flatten().OfType<Placemark>())
                         {
-                            ocupacion = new Ocupacion();
+                            ocupacion = htmlParsing.ParseOcupacion(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", ""));
                             point = placemark.Flatten().OfType<Point>().ElementAt(0);
                             ocupacion.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometry(point.Coordinate.Latitude, point.Coordinate.Longitude, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
-                            ocupacion.Descripcion = htmlParsing.ParseOcupacion(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", "")).Descripcion;
-
                             ocupationDao.Create(ocupacion);
                         }
                         break;
