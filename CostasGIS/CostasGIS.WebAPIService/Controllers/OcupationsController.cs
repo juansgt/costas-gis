@@ -27,12 +27,20 @@ namespace CostasGIS.WebAPIService.Controllers
             return ocupationService.ImportFromKml();
         }
 
+        //[HttpGet]
+        //[AllowAnonymous]
+        //[Route("ocupations/")]
+        //public IEnumerable<string> ImportOcupaciones()
+        //{
+        //    return ocupationService.ImportFromKml();
+        //}
+
         [HttpGet]
         [AllowAnonymous]
         [Route("ocupations/")]
-        public IEnumerable<string> ImportOcupaciones()
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong()
         {
-            return ocupationService.ImportFromKml();
+            return ocupationService.FindOcupacionLatLong();
         }
     }
 }
