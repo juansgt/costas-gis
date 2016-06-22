@@ -9,6 +9,6 @@ namespace CostasGIS.Model.DataAccess.OcupacionDao
 {
     internal interface IOcupacionDao : IGenericDao<Ocupacion, long>
     {
-
+        IEnumerable<Ocupacion> FindOcupacionLatLong(long idProvincia);
     }
 }

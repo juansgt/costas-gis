@@ -42,5 +42,13 @@ namespace CostasGIS.WebAPIService.Controllers
         {
             return ocupationService.FindOcupacionLatLong();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/provincia/{idProvincia:long}")]
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idProvincia)
+        {
+            return ocupationService.FindOcupacionLatLong(idProvincia);
+        }
     }
 }

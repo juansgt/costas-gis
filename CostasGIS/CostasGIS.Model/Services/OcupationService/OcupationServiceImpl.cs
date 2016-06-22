@@ -91,5 +91,26 @@ namespace CostasGIS.Model.Services.OcupationService
 
             return lOcupacionLatLong;
         }
+
+        public IEnumerable<OcupacionLatLong> FindOcupacionLatLong(long idProvincia)
+        {
+            OcupacionLatLong ocupacionLatLong;
+            List<OcupacionLatLong> lOcupacionLatLong = new List<OcupacionLatLong>();
+            double[] latLong;
+
+            foreach (Ocupacion ocupacion in ocupationDao.FindAll())
+            {
+                if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
+                {
+                    ocupacionLatLong = new OcupacionLatLong(ocupacion);
+                    latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
+                    ocupacionLatLong.Longitud = latLong[0];
+                    ocupacionLatLong.Latitud = latLong[1];
+                    lOcupacionLatLong.Add(ocupacionLatLong);
+                }
+            }
+
+            return lOcupacionLatLong;
+        }
     }
 }

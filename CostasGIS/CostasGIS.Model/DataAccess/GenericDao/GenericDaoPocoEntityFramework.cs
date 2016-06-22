@@ -19,7 +19,7 @@ namespace Model.DataAccess.GenericDao
         {
             using (DbContext context = this.getDbContext())
             {
-                context.Configuration.ProxyCreationEnabled = false;
+                //context.Configuration.ProxyCreationEnabled = false;
                 E result = context.Set<E>().Find(id);
 
                 if (result == null)
