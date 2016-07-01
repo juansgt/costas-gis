@@ -14,6 +14,7 @@ using SharpKml.Dom;
 using System.Data.Entity.Spatial;
 using GeometryExtensions;
 using CostasGIS.Model.Services.Util.HTML;
+using Model.DataAccess.Exceptions;
 
 namespace CostasGIS.Model.Services.OcupationService
 {
@@ -71,7 +72,31 @@ namespace CostasGIS.Model.Services.OcupationService
             return names;
         }
 
-        public IEnumerable<OcupacionLatLong> FindOcupacionLatLong()
+        public OcupacionLatLong FindOcupacionLatLong(long idOcupacion)
+        {
+
+            OcupacionLatLong ocupacionLatLong = new OcupacionLatLong();
+            Ocupacion ocupacion;
+            double[] latLong;
+            try
+            {
+                ocupacion = ocupationDao.Find(idOcupacion);
+                if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
+                {
+                    latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
+                    ocupacionLatLong.Longitud = latLong[0];
+                    ocupacionLatLong.Latitud = latLong[1];
+                }
+            }
+            catch (InstanceNotFoundException)
+            {
+                throw;
+            }
+
+            return ocupacionLatLong;
+        }
+
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong()
         {
             OcupacionLatLong ocupacionLatLong;
             List<OcupacionLatLong> lOcupacionLatLong = new List<OcupacionLatLong>();
@@ -92,7 +117,7 @@ namespace CostasGIS.Model.Services.OcupationService
             return lOcupacionLatLong;
         }
 
-        public IEnumerable<OcupacionLatLong> FindOcupacionLatLong(long idProvincia)
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idProvincia)
         {
             OcupacionLatLong ocupacionLatLong;
             List<OcupacionLatLong> lOcupacionLatLong = new List<OcupacionLatLong>();

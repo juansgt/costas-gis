@@ -1,4 +1,7 @@
 ﻿using CostasGIS.Model.Services.OcupationService;
+using GeoJSON.Net.Feature;
+using GeoJSON.Net;
+using GeoJSON.Net.Converters;
 using ObjectContainer;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using GeoJSON.Net.Geometry;
 
 namespace CostasGIS.WebAPIService.Controllers
 {
@@ -40,7 +44,15 @@ namespace CostasGIS.WebAPIService.Controllers
         [Route("ocupations/")]
         public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong()
         {
-            return ocupationService.FindOcupacionLatLong();
+            return ocupationService.FindOcupacionesLatLong();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/{idOcupacion:long}")]
+        public OcupacionLatLong FindOcupacionLatLong(long idOcupacion)
+        {
+            return ocupationService.FindOcupacionLatLong(idOcupacion);
         }
 
         [HttpGet]
@@ -48,7 +60,7 @@ namespace CostasGIS.WebAPIService.Controllers
         [Route("ocupations/provincia/{idProvincia:long}")]
         public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idProvincia)
         {
-            return ocupationService.FindOcupacionLatLong(idProvincia);
+            return ocupationService.FindOcupacionesLatLong(idProvincia);
         }
     }
 }
