@@ -13,6 +13,11 @@
     <ClassType>CostasGIS.Model.DataAccess.ProvinciaDao.IProvinciaDao</ClassType>
     <ClassInstance>CostasGIS.Model.DataAccess.ProvinciaDao.ProvinciaDaoPocoEF, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
   </Class>
+
+  <Class lifetime="new">
+    <ClassType>CostasGIS.Model.DataAccess.MunicipioDao.IMunicipioDao</ClassType>
+    <ClassInstance>CostasGIS.Model.DataAccess.MunicipioDao.MunicipioDaoPocoEF, CostasGIS.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassInstance>
+  </Class>
   
   <!--SERVICIOS-->
 

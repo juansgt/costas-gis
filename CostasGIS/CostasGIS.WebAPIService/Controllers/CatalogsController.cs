@@ -1,5 +1,6 @@
 ﻿using CostasGIS.Model.DataAccess;
 using CostasGIS.Model.Services.CatalogService;
+using CostasGIS.WebAPIService.Exceptions;
 using ObjectContainer;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Http;
 
 namespace CostasGIS.WebAPIService.Controllers
 {
+    [GenericExceptionFilterAttribute]
     public class CatalogsController : ApiController
     {
         private Container container = Container.Instance;

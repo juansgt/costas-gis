@@ -11,5 +11,6 @@ namespace CostasGIS.Model.Services.Util.HTML
     internal interface IHtmlParsing
     {
         Ocupacion ParseOcupacion(string file);
+        Municipio ParseMunicipio(string file);
     }
 }

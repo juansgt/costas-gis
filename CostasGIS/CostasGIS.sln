@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectContainer", "ObjectCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryExtensions", "GeometryExtensions\GeometryExtensions.csproj", "{56F406D2-EE77-4CED-9888-A23DB32FA3E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{C164A7D5-0C00-4162-9251-721469249C59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56F406D2-EE77-4CED-9888-A23DB32FA3E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C164A7D5-0C00-4162-9251-721469249C59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C164A7D5-0C00-4162-9251-721469249C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C164A7D5-0C00-4162-9251-721469249C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C164A7D5-0C00-4162-9251-721469249C59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

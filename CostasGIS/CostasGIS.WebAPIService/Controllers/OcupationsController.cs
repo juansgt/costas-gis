@@ -10,9 +10,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using GeoJSON.Net.Geometry;
+using CostasGIS.WebAPIService.Exceptions;
 
 namespace CostasGIS.WebAPIService.Controllers
 {
+    [GenericExceptionFilterAttribute]
     public class OcupationsController : ApiController
     {
         private Container container = Container.Instance;
@@ -31,13 +33,13 @@ namespace CostasGIS.WebAPIService.Controllers
             return ocupationService.ImportFromKml();
         }
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //[Route("ocupations/")]
-        //public IEnumerable<string> ImportOcupaciones()
-        //{
-        //    return ocupationService.ImportFromKml();
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/importkml")]
+        public IEnumerable<string> ImportOcupaciones()
+        {
+            return ocupationService.ImportFromKml();
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -57,10 +59,10 @@ namespace CostasGIS.WebAPIService.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("ocupations/provincia/{idProvincia:long}")]
-        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idProvincia)
+        [Route("ocupations/municipio/{idMunicipio:long}")]
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idMunicipio)
         {
-            return ocupationService.FindOcupacionesLatLong(idProvincia).Take(20).ToList();
+            return ocupationService.FindOcupacionesLatLong(idMunicipio).ToList();
         }
     }
 }

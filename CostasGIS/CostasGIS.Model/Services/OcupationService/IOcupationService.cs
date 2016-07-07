@@ -9,7 +9,7 @@ namespace CostasGIS.Model.Services.OcupationService
 {
     public interface IOcupationService
     {
-        long AddOcupation(long idProvincia, Ocupacion ocupacion);
+        long AddOcupation(long idMunicipio, Ocupacion ocupacion);
         OcupacionLatLong FindOcupacionLatLong(long idOcupacion);
         IEnumerable<string> ImportFromKml();
         IEnumerable<OcupacionLatLong> FindOcupacionesLatLong();

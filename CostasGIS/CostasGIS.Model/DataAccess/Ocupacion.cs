@@ -18,23 +18,22 @@ namespace CostasGIS.Model.DataAccess
         public string DUNA { get; set; }
         public string SP { get; set; }
         public string DG { get; set; }
-        public Nullable<long> IdProvincia { get; set; }
         public System.Data.Entity.Spatial.DbGeometry Geometria { get; set; }
         public string Huso { get; set; }
         public string Datum { get; set; }
         public string Uso { get; set; }
         public string Tipo { get; set; }
         public string Titulo { get; set; }
+        public string Situacion { get; set; }
         public Nullable<System.DateTime> FechaOtorgamiento { get; set; }
         public Nullable<System.DateTime> FechaExtincion { get; set; }
         public Nullable<System.DateTime> FechaDenegacion { get; set; }
         public Nullable<bool> ExpSancionador { get; set; }
         public string Descripcion { get; set; }
-        public string Municipio { get; set; }
         public Nullable<double> CoordenadaXOriginal { get; set; }
         public Nullable<double> CoordenadaYOriginal { get; set; }
-        public string Situacion { get; set; }
+        public Nullable<long> IdMunicipio { get; set; }
     
-        public virtual Provincia Provincia { get; set; }
+        public virtual Municipio Municipio1 { get; set; }
     }
 }

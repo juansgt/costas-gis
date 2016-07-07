@@ -110,6 +110,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CatalogsController.cs" />
     <Compile Include="Controllers\OcupationsController.cs" />
+    <Compile Include="Exceptions\GenericExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -138,6 +139,10 @@
     <ProjectReference Include="..\ObjectContainer\ObjectContainer.csproj">
       <Project>{677c46b8-57e4-4b76-8a9b-f4046105d8dc}</Project>
       <Name>ObjectContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{c164a7d5-0c00-4162-9251-721469249c59}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

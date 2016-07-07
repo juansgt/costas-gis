@@ -15,6 +15,7 @@ using System.Data.Entity.Spatial;
 using GeometryExtensions;
 using CostasGIS.Model.Services.Util.HTML;
 using Model.DataAccess.Exceptions;
+using CostasGIS.Model.DataAccess.MunicipioDao;
 
 namespace CostasGIS.Model.Services.OcupationService
 {
@@ -23,17 +24,19 @@ namespace CostasGIS.Model.Services.OcupationService
         private readonly int COORDINATE_SYSTEMID = 25829;
         private ObjectContainer.Container container = ObjectContainer.Container.Instance;
         private IOcupacionDao ocupationDao;
+        private IMunicipioDao municipioDao;
 
         public OcupationServiceImpl()
         {
             ocupationDao = container.Resolve<IOcupacionDao>();
+            municipioDao = container.Resolve<IMunicipioDao>();
         }
 
-        public long AddOcupation(long idProvincia, Ocupacion ocupacion)
+        public long AddOcupation(long idMunicipio, Ocupacion ocupacion)
         {
             using (TransactionScope ts = TransactionScopeBuilder.Instance.GetTransactionScope())
             {
-                ocupacion.IdProvincia = idProvincia;
+                ocupacion.IdMunicipio = idMunicipio;
                 ocupacion = ocupationDao.Create(ocupacion);
                 ts.Complete();
 
@@ -45,6 +48,7 @@ namespace CostasGIS.Model.Services.OcupationService
         {
             IHtmlParsing htmlParsing = new HtmlParsingImpl();
             Ocupacion ocupacion;
+            Municipio municipio;
             Point point;
             List<string> names = new List<string>();
             // This will read a Kml file into memory.
@@ -59,16 +63,29 @@ namespace CostasGIS.Model.Services.OcupationService
                     {
                         foreach (Placemark placemark in folder.Flatten().OfType<Placemark>())
                         {
-                            ocupacion = htmlParsing.ParseOcupacion(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", ""));
-                            point = placemark.Flatten().OfType<Point>().ElementAt(0);
-                            ocupacion.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometry(point.Coordinate.Latitude, point.Coordinate.Longitude, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
-                            ocupationDao.Create(ocupacion);
+                            using (TransactionScope ts = TransactionScopeBuilder.Instance.GetTransactionScope())
+                            {
+                                municipio = htmlParsing.ParseMunicipio(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", ""));
+                                try
+                                {
+                                    municipio = municipioDao.Find(municipio.Nombre);
+                                }
+                                catch(InstanceNotFoundException)
+                                {
+                                    municipio = municipioDao.Create(municipio);
+                                }
+                                ocupacion = htmlParsing.ParseOcupacion(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", ""));
+                                point = placemark.Flatten().OfType<Point>().ElementAt(0);
+                                ocupacion.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometry(point.Coordinate.Latitude, point.Coordinate.Longitude, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
+                                ocupacion.IdMunicipio = municipio.IdMunicipio;
+                                ocupationDao.Create(ocupacion);
+                                ts.Complete();
+                            }
                         }
                         break;
                     }
                 }
             }
-
             return names;
         }
 

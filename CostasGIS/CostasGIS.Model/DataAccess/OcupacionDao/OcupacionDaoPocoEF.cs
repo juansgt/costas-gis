@@ -10,11 +10,11 @@ namespace CostasGIS.Model.DataAccess.OcupacionDao
 {
     internal class OcupacionDaoPocoEF : GenericDaoPocoEntityFramework<CostasGISEntities, Ocupacion, long>, IOcupacionDao
     {
-        public IEnumerable<Ocupacion> FindOcupacionLatLong(long idProvincia)
+        public IEnumerable<Ocupacion> FindOcupacionLatLong(long idMunicipio)
         {
             using (CostasGISEntities context = (CostasGISEntities)this.getDbContext())
             {
-                return context.Ocupacion.Where(ent => ent.IdProvincia == idProvincia).ToList();
+                return context.Ocupacion.Where(ent => ent.IdMunicipio == idMunicipio).ToList();
             }
         }
     }

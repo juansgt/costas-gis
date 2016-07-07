@@ -25,6 +25,7 @@ namespace CostasGIS.Model.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Municipio> Municipio { get; set; }
         public virtual DbSet<Ocupacion> Ocupacion { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
     }

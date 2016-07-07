@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CostasGISEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\Entities\Municipio.cs" />
     <Compile Include="DataAccess\Exceptions\DuplicateInstanceException.cs" />
     <Compile Include="DataAccess\Exceptions\ExceptionCode.cs" />
     <Compile Include="DataAccess\Exceptions\InstanceException.cs" />
@@ -86,6 +87,11 @@
     <Compile Include="DataAccess\Exceptions\SqlException.cs" />
     <Compile Include="DataAccess\GenericDao\GenericDaoPocoEntityFramework.cs" />
     <Compile Include="DataAccess\GenericDao\IGenericDao.cs" />
+    <Compile Include="DataAccess\Municipio.cs">
+      <DependentUpon>CostasGISEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\MunicipioDao\IMunicipioDao.cs" />
+    <Compile Include="DataAccess\MunicipioDao\MunicipioDaoPocoEF.cs" />
     <Compile Include="DataAccess\Ocupacion.cs">
       <DependentUpon>CostasGISEntities.tt</DependentUpon>
     </Compile>

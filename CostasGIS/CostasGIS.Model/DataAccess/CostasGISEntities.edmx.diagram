@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="777e71a781224415836414d1c78953fe" Name="Diagram1">
-        <EntityTypeShape EntityType="CostasGISModel.Ocupacion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CostasGISModel.Provincia" Width="1.5" PointX="0.75" PointY="6.375" />
-        <AssociationConnector Association="CostasGISModel.FK_Ocupacion_Provincia" />
+        <EntityTypeShape EntityType="CostasGISModel.Municipio" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="CostasGISModel.Ocupacion" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="CostasGISModel.Provincia" Width="1.5" PointX="0.75" PointY="2.875" />
+        <AssociationConnector Association="CostasGISModel.FK_Municipio_Provincia" />
+        <AssociationConnector Association="CostasGISModel.FK_Ocupacion_Municipio" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,18 +12,20 @@ namespace CostasGIS.Model.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Provincia
+    public partial class Municipio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Provincia()
+        public Municipio()
         {
-            this.Municipio = new HashSet<Municipio>();
+            this.Ocupacion = new HashSet<Ocupacion>();
         }
     
-        public long IdProvincia { get; set; }
+        public long IdMunicipio { get; set; }
         public string Nombre { get; set; }
+        public long IdProvincia { get; set; }
     
+        public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Municipio> Municipio { get; set; }
+        public virtual ICollection<Ocupacion> Ocupacion { get; set; }
     }
 }

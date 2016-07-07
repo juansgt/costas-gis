@@ -29,8 +29,6 @@ namespace CostasGIS.Model.Services.OcupationService
             this.Geometria = ocupacion.Geometria;
             this.Huso = ocupacion.Huso;
             this.IdOcupacion = ocupacion.IdOcupacion;
-            this.IdProvincia = ocupacion.IdProvincia;
-            this.Municipio = ocupacion.Municipio;
             this.Situacion = ocupacion.Situacion;
             this.SP = ocupacion.SP;
             this.Tipo = ocupacion.Tipo;
