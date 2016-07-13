@@ -26,5 +26,14 @@ namespace CostasGIS.Model.DataAccess.MunicipioDao
                 }
             }
         }
+
+        public IEnumerable<Municipio> FindMunicicpiosByProvincia(long idProvincia)
+        {
+            using (CostasGISEntities context = (CostasGISEntities)this.getDbContext())
+            {
+                IEnumerable<Municipio> municipios = context.Municipio.Where(ent => ent.IdProvincia == idProvincia).ToList();
+                return context.Municipio.Where(ent => ent.IdProvincia == idProvincia).ToList();
+            }
+        }
     }
 }

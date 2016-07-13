@@ -14,8 +14,7 @@ namespace CostasGIS.WebAPIService.Exceptions
     {
         public override void OnException(HttpActionExecutedContext context)
         {
-            HttpError error = new HttpError(context.Exception.StackTrace);
-            ExceptionManagement.GetCompleteExceptionErrorMessage(context.Exception, "juansgt@gmail.com", "Error aplicación", null);
+            HttpError error = new HttpError(ExceptionManagement.GetCompleteExceptionErrorMessage(context.Exception, "juansgt@gmail.com", "Error aplicación", null));
 
             context.Response = context.Request.CreateResponse(HttpStatusCode.BadRequest, error);
         }

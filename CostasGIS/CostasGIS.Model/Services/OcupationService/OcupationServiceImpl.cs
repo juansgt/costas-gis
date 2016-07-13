@@ -16,6 +16,7 @@ using GeometryExtensions;
 using CostasGIS.Model.Services.Util.HTML;
 using Model.DataAccess.Exceptions;
 using CostasGIS.Model.DataAccess.MunicipioDao;
+using System.Collections.Concurrent;
 
 namespace CostasGIS.Model.Services.OcupationService
 {
@@ -52,7 +53,7 @@ namespace CostasGIS.Model.Services.OcupationService
             Point point;
             List<string> names = new List<string>();
             // This will read a Kml file into memory.
-            KmlFile file = KmlFile.Load(new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/Documents/KMLImport/Ocupaciones D.P.kml", FileMode.Open));
+            KmlFile file = KmlFile.Load(new FileStream(AppDomain.CurrentDomain.BaseDirectory + "/Documents/KMLImport/Ocupaciones.kml", FileMode.Open));
             
             Kml kml = file.Root as Kml;
             if (kml != null)
@@ -134,13 +135,31 @@ namespace CostasGIS.Model.Services.OcupationService
             return lOcupacionLatLong;
         }
 
-        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idProvincia)
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByProvincia(long idProvincia)
+        {
+            Object thisLock = new Object();
+            List<OcupacionLatLong> lOcupaciones = new List<OcupacionLatLong>();
+            IEnumerable<OcupacionLatLong> aux;
+            
+            Parallel.ForEach(municipioDao.FindMunicicpiosByProvincia(idProvincia), municipio =>
+            {
+                aux = this.FindOcupacionesLatLongByMunicipio(municipio.IdMunicipio);
+                lock (thisLock)
+                {
+                    lOcupaciones.AddRange(aux);
+                }
+            });
+
+            return lOcupaciones;
+        }
+
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipio(long idMunicipio)
         {
             OcupacionLatLong ocupacionLatLong;
-            List<OcupacionLatLong> lOcupacionLatLong = new List<OcupacionLatLong>();
+            ConcurrentQueue<OcupacionLatLong> concurrentQueue = new ConcurrentQueue<OcupacionLatLong>();
             double[] latLong;
 
-            foreach (Ocupacion ocupacion in ocupationDao.FindAll())
+            Parallel.ForEach(ocupationDao.FindOcupacionLatLong(idMunicipio), ocupacion =>
             {
                 if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
                 {
@@ -148,11 +167,11 @@ namespace CostasGIS.Model.Services.OcupationService
                     latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
                     ocupacionLatLong.Longitud = latLong[0];
                     ocupacionLatLong.Latitud = latLong[1];
-                    lOcupacionLatLong.Add(ocupacionLatLong);
+                    concurrentQueue.Enqueue(ocupacionLatLong);
                 }
-            }
+            });
 
-            return lOcupacionLatLong;
+            return concurrentQueue;
         }
     }
 }

@@ -59,10 +59,18 @@ namespace CostasGIS.WebAPIService.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("ocupations/municipio/{idMunicipio:long}")]
-        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idMunicipio)
+        [Route("ocupations/provincia/{idProvincia:long}")]
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByProvincia(long idProvincia)
         {
-            return ocupationService.FindOcupacionesLatLong(idMunicipio).ToList();
+            return ocupationService.FindOcupacionesLatLongByProvincia(idProvincia);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/municipio/{idMunicipio:long}")]
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipio(long idMunicipio)
+        {
+            return ocupationService.FindOcupacionesLatLongByMunicipio(idMunicipio);
         }
     }
 }

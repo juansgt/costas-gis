@@ -13,6 +13,7 @@ namespace CostasGIS.Model.Services.OcupationService
         OcupacionLatLong FindOcupacionLatLong(long idOcupacion);
         IEnumerable<string> ImportFromKml();
         IEnumerable<OcupacionLatLong> FindOcupacionesLatLong();
-        IEnumerable<OcupacionLatLong> FindOcupacionesLatLong(long idProvincia);
+        IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByProvincia(long idProvincia);
+        IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipio(long idMunicipio);
     }
 }

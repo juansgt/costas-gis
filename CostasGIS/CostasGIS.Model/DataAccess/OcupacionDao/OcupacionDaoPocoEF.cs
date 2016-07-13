@@ -14,6 +14,7 @@ namespace CostasGIS.Model.DataAccess.OcupacionDao
         {
             using (CostasGISEntities context = (CostasGISEntities)this.getDbContext())
             {
+                //IEnumerable<Ocupacion> ocupaciones = context.Ocupacion.Where(ent => ent.IdMunicipio == idMunicipio).ToList();
                 return context.Ocupacion.Where(ent => ent.IdMunicipio == idMunicipio).ToList();
             }
         }
