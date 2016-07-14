@@ -29,5 +29,13 @@ namespace CostasGIS.WebAPIService.Controllers
         {
             return catalogService.FindProvincias();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("catalogs/municipios/provincia/{idProvincia:long}")]
+        public IEnumerable<Municipio> FindMunicipiosByProvincia(long idProvincia)
+        {
+            return catalogService.FindMunicipiosByProvincia(idProvincia);
+        }
     }
 }

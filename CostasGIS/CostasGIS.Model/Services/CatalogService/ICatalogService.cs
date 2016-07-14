@@ -10,6 +10,6 @@ namespace CostasGIS.Model.Services.CatalogService
     public interface ICatalogService
     {
         IEnumerable<Provincia> FindProvincias();
-
+        IEnumerable<Municipio> FindMunicipiosByProvincia(long idProvincia);
     }
 }

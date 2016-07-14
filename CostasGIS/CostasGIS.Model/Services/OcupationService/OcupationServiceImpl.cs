@@ -159,7 +159,7 @@ namespace CostasGIS.Model.Services.OcupationService
             ConcurrentQueue<OcupacionLatLong> concurrentQueue = new ConcurrentQueue<OcupacionLatLong>();
             double[] latLong;
 
-            Parallel.ForEach(ocupationDao.FindOcupacionLatLong(idMunicipio), ocupacion =>
+            foreach(Ocupacion ocupacion in ocupationDao.FindOcupacionLatLong(idMunicipio))
             {
                 if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
                 {
@@ -169,7 +169,7 @@ namespace CostasGIS.Model.Services.OcupationService
                     ocupacionLatLong.Latitud = latLong[1];
                     concurrentQueue.Enqueue(ocupacionLatLong);
                 }
-            });
+            }
 
             return concurrentQueue;
         }
