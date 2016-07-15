@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Web.Http;
 using GeoJSON.Net.Geometry;
 using CostasGIS.WebAPIService.Exceptions;
+using CostasGIS.Model.DataAccess;
 
 namespace CostasGIS.WebAPIService.Controllers
 {
@@ -63,6 +64,14 @@ namespace CostasGIS.WebAPIService.Controllers
         public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipio(long idMunicipio)
         {
             return ocupationService.FindOcupacionesLatLongByMunicipio(idMunicipio);
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("trafficsigns/senalesverticales/{idOcupation:long}")]
+        public long UpdateOcupation(long idOcupation, Ocupacion ocupacion)
+        {
+            return ocupationService.UpdateOcupation(idOcupation, ocupacion);
         }
     }
 }

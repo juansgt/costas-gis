@@ -173,5 +173,43 @@ namespace CostasGIS.Model.Services.OcupationService
 
             return concurrentQueue;
         }
+
+        public long UpdateOcupation(long idOcupation, Ocupacion ocupacion)
+        {
+            try
+            {
+                using (TransactionScope ts = TransactionScopeBuilder.Instance.GetTransactionScope())
+                {
+                    Ocupacion ocupation = ocupationDao.Find(idOcupation);
+
+                    ocupation.CoordenadaXOriginal = ocupacion.CoordenadaXOriginal;
+                    ocupation.CoordenadaYOriginal = ocupacion.CoordenadaYOriginal;
+                    ocupation.Datum = ocupacion.Datum;
+                    ocupation.Descripcion = ocupacion.Descripcion;
+                    ocupation.DG = ocupacion.DG;
+                    ocupation.DUNA = ocupacion.DUNA;
+                    ocupation.ExpSancionador = ocupacion.ExpSancionador;
+                    ocupation.FechaDenegacion = ocupacion.FechaDenegacion;
+                    ocupation.FechaExtincion = ocupacion.FechaExtincion;
+                    ocupation.FechaOtorgamiento = ocupacion.FechaOtorgamiento;
+                    ocupation.Geometria = ocupacion.Geometria;
+                    ocupation.Huso = ocupacion.Huso;
+                    ocupation.IdMunicipio = ocupacion.IdMunicipio;
+                    ocupation.Situacion = ocupacion.Situacion;
+                    ocupation.SP = ocupacion.SP;
+                    ocupation.Tipo = ocupacion.Tipo;
+                    ocupation.Titulo = ocupacion.Titulo;
+                    ocupation.Uso = ocupacion.Uso;
+                    ocupation = ocupationDao.Update(ocupation);
+                    ts.Complete();
+
+                    return ocupation.IdOcupacion;
+                }
+            }
+            catch(InstanceNotFoundException)
+            {
+                throw;
+            }
+        }
     }
 }
