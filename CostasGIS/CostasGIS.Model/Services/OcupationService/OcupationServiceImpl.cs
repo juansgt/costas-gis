@@ -92,26 +92,23 @@ namespace CostasGIS.Model.Services.OcupationService
 
         public OcupacionLatLong FindOcupacionLatLong(long idOcupacion)
         {
-
-            OcupacionLatLong ocupacionLatLong = new OcupacionLatLong();
-            Ocupacion ocupacion;
+            Ocupacion ocupacion = ocupationDao.Find(idOcupacion);
+            List<OcupacionLatLong> result = new List<OcupacionLatLong>();
             double[] latLong;
-            try
-            {
-                ocupacion = ocupationDao.Find(idOcupacion);
-                if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
-                {
-                    latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
-                    ocupacionLatLong.Longitud = latLong[0];
-                    ocupacionLatLong.Latitud = latLong[1];
-                }
-            }
-            catch (InstanceNotFoundException)
-            {
-                throw;
-            }
 
-            return ocupacionLatLong;
+            if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
+            {
+                OcupacionLatLong ocupacionLatLong = new OcupacionLatLong(ocupacion);
+                latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
+                ocupacionLatLong.Longitud = latLong[0];
+                ocupacionLatLong.Latitud = latLong[1];
+
+                return ocupacionLatLong;
+            }
+            else
+            {
+                throw new MissingFieldException("XCoordinate or YCoordinate has no value");
+            }
         }
 
         public IEnumerable<OcupacionLatLong> FindOcupacionesLatLong()
@@ -156,7 +153,7 @@ namespace CostasGIS.Model.Services.OcupationService
         public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipio(long idMunicipio)
         {
             OcupacionLatLong ocupacionLatLong;
-            ConcurrentQueue<OcupacionLatLong> concurrentQueue = new ConcurrentQueue<OcupacionLatLong>();
+            List<OcupacionLatLong> result = new List<OcupacionLatLong>();
             double[] latLong;
 
             foreach(Ocupacion ocupacion in ocupationDao.FindOcupacionLatLong(idMunicipio))
@@ -167,11 +164,11 @@ namespace CostasGIS.Model.Services.OcupationService
                     latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
                     ocupacionLatLong.Longitud = latLong[0];
                     ocupacionLatLong.Latitud = latLong[1];
-                    concurrentQueue.Enqueue(ocupacionLatLong);
+                    result.Add(ocupacionLatLong);
                 }
             }
 
-            return concurrentQueue;
+            return result;
         }
 
         public long UpdateOcupation(long idOcupation, Ocupacion ocupacion)
