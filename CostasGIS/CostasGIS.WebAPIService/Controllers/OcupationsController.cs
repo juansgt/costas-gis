@@ -66,6 +66,22 @@ namespace CostasGIS.WebAPIService.Controllers
             return ocupationService.FindOcupacionesLatLongByMunicipio(idMunicipio);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/descriptiondetails/provincia/{idProvincia:long}")]
+        public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByProvincia(long idProvincia)
+        {
+            return ocupationService.FindOcupacionesLatLongDescDetByProvincia(idProvincia);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/descriptiondetails/municipio/{idMunicipio:long}")]
+        public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByMunicipio(long idMunicipio)
+        {
+            return ocupationService.FindOcupacionesLatLongDescDetByMunicipio(idMunicipio);
+        }
+
         [HttpPut]
         [AllowAnonymous]
         [Route("trafficsigns/senalesverticales/{idOcupation:long}")]

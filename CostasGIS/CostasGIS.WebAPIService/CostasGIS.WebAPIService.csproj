@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CatalogsController.cs" />
     <Compile Include="Controllers\OcupationsController.cs" />
     <Compile Include="Exceptions\GenericExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">

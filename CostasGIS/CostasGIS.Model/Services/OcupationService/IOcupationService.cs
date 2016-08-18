@@ -15,6 +15,8 @@ namespace CostasGIS.Model.Services.OcupationService
         IEnumerable<OcupacionLatLong> FindOcupacionesLatLong();
         IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByProvincia(long idProvincia);
         IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipio(long idMunicipio);
+        IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByProvincia(long idProvincia);
+        IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByMunicipio(long idMunicipio);
         long UpdateOcupation(long idOcupation, Ocupacion ocupacion); 
     }
 }

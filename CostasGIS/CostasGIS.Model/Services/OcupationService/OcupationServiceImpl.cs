@@ -171,6 +171,45 @@ namespace CostasGIS.Model.Services.OcupationService
             return result;
         }
 
+        public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByProvincia(long idProvincia)
+        {
+            Object thisLock = new Object();
+            List<OcupationLatLongDescriptionDetails> lOcupaciones = new List<OcupationLatLongDescriptionDetails>();
+            IEnumerable<OcupationLatLongDescriptionDetails> aux;
+
+            Parallel.ForEach(municipioDao.FindMunicicpiosByProvincia(idProvincia), municipio =>
+            {
+                aux = this.FindOcupacionesLatLongDescDetByMunicipio(municipio.IdMunicipio);
+                lock (thisLock)
+                {
+                    lOcupaciones.AddRange(aux);
+                }
+            });
+
+            return lOcupaciones;
+        }
+
+        public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByMunicipio(long idMunicipio)
+        {
+            OcupationLatLongDescriptionDetails ocupacionLatLong;
+            List<OcupationLatLongDescriptionDetails> result = new List<OcupationLatLongDescriptionDetails>();
+            double[] latLong;
+
+            foreach (Ocupacion ocupacion in ocupationDao.FindOcupacionLatLong(idMunicipio))
+            {
+                if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
+                {
+                    ocupacionLatLong = new OcupationLatLongDescriptionDetails(ocupacion);
+                    latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
+                    ocupacionLatLong.Longitud = latLong[0];
+                    ocupacionLatLong.Latitud = latLong[1];
+                    result.Add(ocupacionLatLong);
+                }
+            }
+
+            return result;
+        }
+
         public long UpdateOcupation(long idOcupation, Ocupacion ocupacion)
         {
             try

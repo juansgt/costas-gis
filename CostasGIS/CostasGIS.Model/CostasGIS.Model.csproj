@@ -107,6 +107,7 @@
     <Compile Include="Services\CatalogService\ICatalogService.cs" />
     <Compile Include="Services\OcupationService\IOcupationService.cs" />
     <Compile Include="Services\OcupationService\OcupacionLatLong.cs" />
+    <Compile Include="Services\OcupationService\OcupationLatLongDescriptionDetails.cs" />
     <Compile Include="Services\OcupationService\OcupationServiceImpl.cs" />
     <Compile Include="Services\Util\HTML\HtmlParsingImpl.cs" />
     <Compile Include="Services\Util\HTML\IHtmlParsing.cs" />
