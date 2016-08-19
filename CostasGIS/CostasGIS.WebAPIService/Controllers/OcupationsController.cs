@@ -84,8 +84,16 @@ namespace CostasGIS.WebAPIService.Controllers
 
         [HttpPut]
         [AllowAnonymous]
-        [Route("trafficsigns/senalesverticales/{idOcupation:long}")]
+        [Route("ocupations/{idOcupation:long}")]
         public long UpdateOcupation(long idOcupation, Ocupacion ocupacion)
+        {
+            return ocupationService.UpdateOcupation(idOcupation, ocupacion);
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("ocupations/descriptiondetails/{idOcupation:long}")]
+        public long UpdateOcupation(long idOcupation, OcupationLatLongDescriptionDetails ocupacion)
         {
             return ocupationService.UpdateOcupation(idOcupation, ocupacion);
         }

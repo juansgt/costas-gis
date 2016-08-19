@@ -61,7 +61,7 @@ namespace GeometryExtensions
             return xy;
         }
 
-        public static string TransformToGeometry(double latitude, double longitude, double altitude, int coordinateSystemId)
+        public static string TransformToGeometryWKT(double latitude, double longitude, double altitude, int coordinateSystemId)
         {
             WKTWriter wktWriter = new WKTWriter();
             WKTReader wktReader = new WKTReader();

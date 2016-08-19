@@ -77,7 +77,7 @@ namespace CostasGIS.Model.Services.OcupationService
                                 }
                                 ocupacion = htmlParsing.ParseOcupacion(placemark.Description.Text.Replace("<![CDATA[", "").Replace("]]>", ""));
                                 point = placemark.Flatten().OfType<Point>().ElementAt(0);
-                                ocupacion.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometry(point.Coordinate.Latitude, point.Coordinate.Longitude, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
+                                ocupacion.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometryWKT(point.Coordinate.Latitude, point.Coordinate.Longitude, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
                                 ocupacion.IdMunicipio = municipio.IdMunicipio;
                                 ocupationDao.Create(ocupacion);
                                 ts.Complete();
@@ -243,6 +243,29 @@ namespace CostasGIS.Model.Services.OcupationService
                 }
             }
             catch(InstanceNotFoundException)
+            {
+                throw;
+            }
+        }
+
+        public long UpdateOcupation(long idOcupation, OcupationLatLongDescriptionDetails ocupacion)
+        {
+            try
+            {
+                using (TransactionScope ts = TransactionScopeBuilder.Instance.GetTransactionScope())
+                {
+                    Ocupacion ocupation = ocupationDao.Find(idOcupation);
+                    
+                    ocupation.Descripcion = ocupacion.Descripcion;
+                    ocupation.Titulo = ocupacion.Titulo;
+                    ocupation.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometryWKT(ocupacion.Latitud, ocupacion.Longitud, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
+                    ocupation = ocupationDao.Update(ocupation);
+                    ts.Complete();
+
+                    return ocupation.IdOcupacion;
+                }
+            }
+            catch (InstanceNotFoundException)
             {
                 throw;
             }
