@@ -171,6 +171,11 @@ namespace CostasGIS.Model.Services.OcupationService
             return result;
         }
 
+        public IEnumerable<OcupacionLatLong> FindOcupacionesLatLongByMunicipioEstado(long idMunicipio, Ocupacion.EstadoOcupacion estado)
+        {
+            return this.FindOcupacionesLatLongByMunicipio(idMunicipio).Where(ent => ent.Estado == estado).ToList();
+        }
+
         public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByProvincia(long idProvincia)
         {
             Object thisLock = new Object();
@@ -196,6 +201,27 @@ namespace CostasGIS.Model.Services.OcupationService
             double[] latLong;
 
             foreach (Ocupacion ocupacion in ocupationDao.FindOcupacionLatLong(idMunicipio))
+            {
+                if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
+                {
+                    ocupacionLatLong = new OcupationLatLongDescriptionDetails(ocupacion);
+                    latLong = ProjTransform.TransformToLatLong(ocupacion.Geometria.XCoordinate.Value, ocupacion.Geometria.YCoordinate.Value, 0, COORDINATE_SYSTEMID);
+                    ocupacionLatLong.Longitud = latLong[0];
+                    ocupacionLatLong.Latitud = latLong[1];
+                    result.Add(ocupacionLatLong);
+                }
+            }
+
+            return result;
+        }
+
+        public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByMunicipioEstado(long idMunicipio, Ocupacion.EstadoOcupacion estado)
+        {
+            OcupationLatLongDescriptionDetails ocupacionLatLong;
+            List<OcupationLatLongDescriptionDetails> result = new List<OcupationLatLongDescriptionDetails>();
+            double[] latLong;
+
+            foreach (Ocupacion ocupacion in this.FindOcupacionesLatLongByMunicipioEstado(idMunicipio, estado))
             {
                 if (ocupacion.Geometria.XCoordinate.HasValue && ocupacion.Geometria.YCoordinate.HasValue)
                 {
@@ -248,21 +274,52 @@ namespace CostasGIS.Model.Services.OcupationService
             }
         }
 
-        public long UpdateOcupation(long idOcupation, OcupationLatLongDescriptionDetails ocupacion)
+        public long UpdateOcupationLatLongDescriptionDetails(long idOcupation, OcupationLatLongDescriptionDetails ocupationLatLongDescriptionDetails)
         {
             try
             {
                 using (TransactionScope ts = TransactionScopeBuilder.Instance.GetTransactionScope())
                 {
-                    Ocupacion ocupation = ocupationDao.Find(idOcupation);
-                    
-                    ocupation.Descripcion = ocupacion.Descripcion;
-                    ocupation.Titulo = ocupacion.Titulo;
-                    ocupation.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometryWKT(ocupacion.Latitud, ocupacion.Longitud, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
-                    ocupation = ocupationDao.Update(ocupation);
+                    Ocupacion ocupationOld = ocupationDao.Find(idOcupation);
+
+                    ocupationOld.Descripcion = ocupationLatLongDescriptionDetails.Descripcion;
+                    ocupationOld.Titulo = ocupationLatLongDescriptionDetails.Titulo;
+                    ocupationOld.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometryWKT(ocupationLatLongDescriptionDetails.Latitud, ocupationLatLongDescriptionDetails.Longitud, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
+                    ocupationOld = ocupationDao.Update(ocupationOld);
                     ts.Complete();
 
-                    return ocupation.IdOcupacion;
+                    return ocupationOld.IdOcupacion;
+                }
+            }
+            catch (InstanceNotFoundException)
+            {
+                throw;
+            }
+        }
+
+        public long UpdateOcupationLatLong(long idOcupation, OcupacionLatLong ocupacionLatLong)
+        {
+            try
+            {
+                using (TransactionScope ts = TransactionScopeBuilder.Instance.GetTransactionScope())
+                {
+                    Ocupacion ocupationOld = ocupationDao.Find(idOcupation);
+
+                    ocupationOld.Descripcion = ocupacionLatLong.Descripcion;
+                    ocupationOld.Titulo = ocupacionLatLong.Titulo;
+                    ocupationOld.DUNA = ocupacionLatLong.DUNA;
+                    ocupationOld.SP = ocupacionLatLong.SP;
+                    ocupationOld.Huso = ocupacionLatLong.Huso;
+                    ocupationOld.Datum = ocupacionLatLong.Datum;
+                    ocupationOld.Uso = ocupacionLatLong.Uso;
+                    ocupationOld.Tipo = ocupacionLatLong.Tipo;
+                    ocupationOld.Titulo = ocupacionLatLong.Titulo;
+                    ocupationOld.Situacion = ocupacionLatLong.Situacion;
+                    ocupationOld.Geometria = DbGeometry.PointFromText(ProjTransform.TransformToGeometryWKT(ocupacionLatLong.Latitud, ocupacionLatLong.Longitud, 0, COORDINATE_SYSTEMID), COORDINATE_SYSTEMID);
+                    ocupationOld = ocupationDao.Update(ocupationOld);
+                    ts.Complete();
+
+                    return ocupationOld.IdOcupacion;
                 }
             }
             catch (InstanceNotFoundException)

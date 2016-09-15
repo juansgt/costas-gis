@@ -243,3 +243,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/CostasGIS/CostasGIS.Model/ClassDiagram2.cd
+/CostasGIS/CostasGIS.Model/ClassDiagram1.cd

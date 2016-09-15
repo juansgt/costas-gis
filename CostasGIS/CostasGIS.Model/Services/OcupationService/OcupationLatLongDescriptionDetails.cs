@@ -13,6 +13,7 @@ namespace CostasGIS.Model.Services.OcupationService
         public double Latitud { get; set; }
         public double Longitud { get; set; }
         public string Titulo { get; set; }
+        public string Situacion { get; set; }
         public string Descripcion { get; set; }
 
         public OcupationLatLongDescriptionDetails() { }
@@ -22,6 +23,7 @@ namespace CostasGIS.Model.Services.OcupationService
             this.IdOcupacion = ocupacion.IdOcupacion;
             this.Descripcion = ocupacion.Descripcion;
             this.Titulo = ocupacion.Titulo;
+            this.Situacion = ocupacion.Situacion;
         }
     }
 }

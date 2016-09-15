@@ -12,6 +12,7 @@ using System.Web.Http;
 using GeoJSON.Net.Geometry;
 using CostasGIS.WebAPIService.Exceptions;
 using CostasGIS.Model.DataAccess;
+using Utils.CustomAttributes;
 
 namespace CostasGIS.WebAPIService.Controllers
 {
@@ -82,6 +83,40 @@ namespace CostasGIS.WebAPIService.Controllers
             return ocupationService.FindOcupacionesLatLongDescDetByMunicipio(idMunicipio);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ocupations/descriptiondetails/municipio/{idMunicipio:long}/estado/{estado}")]
+        public IEnumerable<OcupationLatLongDescriptionDetails> FindOcupacionesLatLongDescDetByMunicipioEstado(long idMunicipio, string estado)
+        {
+            Ocupacion.EstadoOcupacion estadoOcupacion = Ocupacion.EstadoOcupacion.INDETERMINADO;
+
+            if (estado == StringEnum.GetStringValue(Ocupacion.EstadoOcupacion.SIN_DATOS))
+            {
+                estadoOcupacion = Ocupacion.EstadoOcupacion.SIN_DATOS;
+            }
+            else if (estado == StringEnum.GetStringValue(Ocupacion.EstadoOcupacion.CADUCADA_DENEGADA))
+            {
+                estadoOcupacion = Ocupacion.EstadoOcupacion.CADUCADA_DENEGADA;
+            }
+            else if (estado == StringEnum.GetStringValue(Ocupacion.EstadoOcupacion.SIN_INICIAR))
+            {
+                estadoOcupacion = Ocupacion.EstadoOcupacion.SIN_INICIAR;
+            }
+            else if (estado == StringEnum.GetStringValue(Ocupacion.EstadoOcupacion.EN_TRAMITE))
+            {
+                estadoOcupacion = Ocupacion.EstadoOcupacion.EN_TRAMITE;
+            }
+            else if (estado == StringEnum.GetStringValue(Ocupacion.EstadoOcupacion.OTORGADA))
+            {
+                estadoOcupacion = Ocupacion.EstadoOcupacion.OTORGADA;
+            }
+            else if (estado == StringEnum.GetStringValue(Ocupacion.EstadoOcupacion.INDETERMINADO))
+            {
+                estadoOcupacion = Ocupacion.EstadoOcupacion.INDETERMINADO;
+            }
+            return ocupationService.FindOcupacionesLatLongDescDetByMunicipioEstado(idMunicipio, estadoOcupacion);
+        }
+
         [HttpPut]
         [AllowAnonymous]
         [Route("ocupations/{idOcupation:long}")]
@@ -95,7 +130,15 @@ namespace CostasGIS.WebAPIService.Controllers
         [Route("ocupations/descriptiondetails/{idOcupation:long}")]
         public long UpdateOcupation(long idOcupation, OcupationLatLongDescriptionDetails ocupacion)
         {
-            return ocupationService.UpdateOcupation(idOcupation, ocupacion);
+            return ocupationService.UpdateOcupationLatLongDescriptionDetails(idOcupation, ocupacion);
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("ocupationsLatLong/{idOcupation:long}")]
+        public long UpdateOcupation(long idOcupation, OcupacionLatLong ocupacionLatLong)
+        {
+            return ocupationService.UpdateOcupationLatLong(idOcupation, ocupacionLatLong);
         }
     }
 }
