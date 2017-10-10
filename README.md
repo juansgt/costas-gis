@@ -1,5 +1,5 @@
 # costas-gis
-Back-end application of the geographic information system, responsible for managing the public business licenses in the coast of Spain. It provides the necessary REST services for the Web and mobile apps. It’s written in C# using .NET Framework 4.5, in particular: Web API 2 for the RESTful services layer and ADO .NET Entity Framework 6 as ORM.
+Back-end application of the geographic information system, responsible for managing the public business licenses throughout the coast of Spain. It provides the necessary REST services for the Web and mobile apps. It’s written in C# using .NET Framework 4.5, in particular: Web API 2 for the RESTful services layer and ADO .NET Entity Framework 6 as ORM.
 <p></p>
 Some of the most representative services the application provides are:
 <p></p>
